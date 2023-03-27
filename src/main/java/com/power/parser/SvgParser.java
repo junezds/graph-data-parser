@@ -51,7 +51,4 @@ public class SvgParser {
         }
     }
 
-    public static void main(String[] args) {
-
-    }
 }

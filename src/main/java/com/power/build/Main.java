@@ -15,25 +15,82 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class Main {
 
+    private static XmlParser xmlParser = new XmlParser();
+    private static SvgParser svgParser = new SvgParser();
+
+    private static String xmlBasePath;
+    private static String svgBasePath;
+
+    static {
+        Properties properties = null;
+        try {
+            properties = new PropertyFileUtil().loadPropertyFile("staticFilePath.properties");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        xmlBasePath = properties.getProperty("xmlBasePath");
+        svgBasePath = properties.getProperty("svgBasePath");
+    }
+
     public static void main(String[] args) throws IOException {
-        printSize();
+//        printSize();
 //        printContent();
+        handleAllXMLFile(xmlFilePath -> {
+            XmlSonNodeType type1 = XmlSonNodeType.BusbarSection;
+            XmlSonNodeType type2 = XmlSonNodeType.Substation;
+
+            File xmlFile = xmlFilePath.toFile();
+            List<Element> xmlElementList_1 = xmlParser.getSonNodeByName(xmlFile, type1);
+            List<Element> xmlElementList_2 = xmlParser.getSonNodeByName(xmlFile, type2);
+
+            List<String> type2_id_list = new ArrayList<>();
+            xmlElementList_2.forEach(element -> {
+                String id = element.attribute("ID").getValue();
+                type2_id_list.add(id);
+            });
+            Boolean allIn = true;
+            for (Element type1_element : xmlElementList_1) {
+                Element equipmentContainerElement = type1_element.element("Equipment.EquipmentContainer");
+                String equipmentContainer_id = equipmentContainerElement.attributeValue("resource").substring(1);
+                if (!isStringInCollection(equipmentContainer_id, type2_id_list)) {
+                    System.out.println(equipmentContainer_id);
+                    allIn = false;
+                    break;
+                }
+            }
+
+            System.out.println(String.format(
+                    "%s --- %s:%d; %s:%d; %s",
+                    allIn.toString(),
+                    type1.getName(),
+                    xmlElementList_1.size(),
+                    type2.getName(),
+                    xmlElementList_2.size(),
+                    xmlFilePath.getFileName().toString()
+            ));
+        });
 
     }
 
-    private static void printSize() throws IOException {
-        Properties properties = new PropertyFileUtil().loadPropertyFile("staticFilePath.properties");
-        String xmlBasePath = properties.getProperty("xmlBasePath");
-        String svgBasePath = properties.getProperty("svgBasePath");
-        XmlParser xmlParser = new XmlParser();
-        SvgParser svgParser = new SvgParser();
 
-        Stream<Path> pathStream = Files.walk(Path.of(xmlBasePath), 1).filter(Files::isRegularFile);
-        pathStream.forEach(xmlFilePath -> {
+    private static boolean isStringInCollection(String s, Collection<String> c){
+        boolean result = false;
+        for (String s_i : c) {
+            if (s_i.equals(s)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    private static void printSize() throws IOException {
+        handleAllXMLFile(xmlFilePath -> {
             String fileName = xmlFilePath.getFileName().toString().replaceFirst(".xml", ".svg");
             Path svgPath = Paths.get(svgBasePath, fileName);
             File svgFile = svgPath.toFile();
@@ -46,9 +103,18 @@ public class Main {
         });
     }
 
+
+    private static void handleAllXMLFile(Consumer<Path> consumer) throws IOException {
+
+        Stream<Path> pathStream = Files.walk(Path.of(xmlBasePath), 1).filter(Files::isRegularFile);
+
+        pathStream.forEach(consumer);
+    }
+
+
     private static void printContent() {
-        String xmlUrl = "/home/neon/BigProjects/bigData/power_grid/xml/4c40180b-acb9-47c5-9615-d5bf434920f3__10kV吴家山线133.xml";
-        String svgUrl = "/home/neon/BigProjects/bigData/power_grid/svg/4c40180b-acb9-47c5-9615-d5bf434920f3__10kV吴家山线133.svg";
+        String xmlUrl = "/Users/river/Documents/power_source_data/xml/4c40180b-acb9-47c5-9615-d5bf434920f3__10kV吴家山线133.xml";
+        String svgUrl = "/Users/river/Documents/power_source_data/svg/4c40180b-acb9-47c5-9615-d5bf434920f3__10kV吴家山线133.svg";
         File xmlFile = new File(xmlUrl);
         File svgFile = new File(svgUrl);
         XmlParser xmlParser = new XmlParser();
@@ -70,6 +136,16 @@ public class Main {
             }
         });
     }
+
+    /**
+     * 获取所有与breaker相连的设备类型PSRType
+     */
+//    public static Set<XmlSonNodeType> getConnectedTypeSet(XmlSonNodeType sourceType) {
+//        Set<XmlSonNodeType> targetTypeSet = new HashSet<>();
+//
+//    }
+
+
 
     /**
      * 获取所有的XML中的PSRType

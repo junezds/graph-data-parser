@@ -1,0 +1,142 @@
+{
+  "10000100": {
+    "desc": "馈线",
+    "xmlSonNodeType": "Feeder"
+  },
+  "30000005": {
+    "desc": "配电站",
+    "xmlSonNodeType": "Substation"
+  },
+  "30200002": {
+    "desc": "配电变压器-双绕组",
+    "xmlSonNodeType": "PowerTransformer"
+  },
+  "30500000": {
+    "desc": "站内-断路器",
+    "xmlSonNodeType": "Breaker"
+  },
+  "30000004": {
+    "desc": "开关站",
+    "xmlSonNodeType": "Substation"
+  },
+  "10200000": {
+    "desc": "直线-运行杆塔",
+    "xmlSonNodeType": "PoleCode"
+  },
+  "20200000": {
+    "desc": "站外-电缆终端头",
+    "xmlSonNodeType": "Junction"
+  },
+  "10200001": {
+    "desc": "耐张-运行杆塔",
+    "xmlSonNodeType": "PoleCode"
+  },
+  "11300000": {
+    "desc": "柱上-隔离开关",
+    "xmlSonNodeType": "Disconnector"
+  },
+  "32400000": {
+    "desc": "环网柜",
+    "xmlSonNodeType": "Substation"
+  },
+  "37000000": {
+    "desc": "站外-中压用户接入点",
+    "xmlSonNodeType": "EnergyConsumer"
+  },
+  "20100000": {
+    "desc": "站外-电缆段",
+    "xmlSonNodeType": "ACLineSegment"
+  },
+  "10100000": {
+    "desc": "导线段",
+    "xmlSonNodeType": "ACLineSegment"
+  },
+  "30700002": {
+    "desc": "站内-三工位负荷开关",
+    "xmlSonNodeType": "CompositeSwitch"
+  },
+  "11200000": {
+    "desc": "柱上-负荷开关",
+    "xmlSonNodeType": "LoadBreakSwitch"
+  },
+  "20400000": {
+    "desc": "站房-电缆分支箱",
+    "xmlSonNodeType": "Substation"
+  },
+  "32300000": {
+    "desc": "箱式变电站",
+    "xmlSonNodeType": "Substation"
+  },
+  "30700000": {
+    "desc": "站内-负荷开关",
+    "xmlSonNodeType": "LoadBreakSwitch"
+  },
+  "30500099": {
+    "desc": "配电-站内三工位断路器",
+    "xmlSonNodeType": "CompositeSwitch"
+  },
+  "11500001": {
+    "desc": "柱上-负荷式熔断器",
+    "xmlSonNodeType": "Fuse"
+  },
+  "11500000": {
+    "desc": "柱上-跌落式熔断器",
+    "xmlSonNodeType": "Fuse"
+  },
+  "11000000": {
+    "desc": "柱上变压器",
+    "xmlSonNodeType": "PowerTransformer"
+  },
+  "11000001": {
+    "desc": "柱上-用户变压器",
+    "xmlSonNodeType": "PowerTransformer"
+  },
+  "30600000": {
+    "desc": "站内-隔离开关",
+    "xmlSonNodeType": "Disconnector"
+  },
+  "30900000": {
+    "desc": "站内-熔断器",
+    "xmlSonNodeType": "Fuse"
+  },
+  "30300000": {
+    "desc": "站内-所用变",
+    "xmlSonNodeType": "PowerTransformer"
+  },
+  "30000000": {
+    "desc": "变电站",
+    "xmlSonNodeType": "Substation"
+  },
+  "31100000": {
+    "desc": "母线",
+    "xmlSonNodeType": "BusbarSection"
+  },
+  "30600007": {
+    "desc": "站内-三工位隔离刀闸",
+    "xmlSonNodeType": "CompositeSwitch"
+  },
+  "30600006": {
+    "desc": "站内-T型开关",
+    "xmlSonNodeType": "CompositeSwitch"
+  },
+  "20300000": {
+    "desc": "站外-电缆终端头",
+    "xmlSonNodeType": "Junction"
+  },
+  "11100000": {
+    "desc": "柱上-断路器",
+    "xmlSonNodeType": "Breaker"
+  },
+  "11400000": {
+    "desc": "柱上-重合器",
+    "xmlSonNodeType": "Disconnector"
+  },
+  "30600002": {
+    "desc": "站内-V型开关",
+    "xmlSonNodeType": "CompositeSwitch"
+  },
+  "30600001": {
+    "desc": "站内-接地刀闸",
+    "xmlSonNodeType": "GroundDisconnector"
+  }
+}
