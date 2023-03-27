@@ -59,19 +59,21 @@
             <version>4.4.9</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.neo4j/neo4j-ogm-core -->
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-ogm-core</artifactId>
-            <version>3.2.23</version>
-            <scope>compile</scope>
+            <version>3.2.39</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.neo4j/neo4j-ogm-bolt-driver -->
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-ogm-bolt-driver</artifactId>
-            <version>3.2.23</version>
-            <scope>runtime</scope>
+            <version>3.2.39</version>
         </dependency>
+
+
 
     </dependencies>
 
